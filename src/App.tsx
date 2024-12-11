@@ -17,16 +17,6 @@ const App: React.FC = () => {
         setTasks((prevTasks) => [...prevTasks, newTask]);
     };
 
-    const updateTask = (updatedTask: Task) => {
-        setTasks((prevTasks) =>
-            prevTasks.map((task) =>
-                task.id === updatedTask.id ? updatedTask : task
-            )
-        )
-        console.log(updatedTask);
-    }
-
-
     return (
         <div className="flex justify-center bg-sky-100">
 
@@ -45,9 +35,7 @@ const App: React.FC = () => {
 
                             <p>{task.description}</p>
 
-                            {/*<p className="text-sm text-gray-500">Created at: {task.createdAt.toLocaleString()}</p>*/}
-                            <DialogDemo task={task} updateTask={updateTask}/>
-
+                            <p className="text-sm text-gray-500">Created at: {task.createdAt.toLocaleString()}</p>
                         </li>
                     ))}
                 </ul>
