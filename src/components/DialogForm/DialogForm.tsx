@@ -11,7 +11,7 @@ import {
 import {Input} from "@/components/ui/input.tsx"
 import {Label} from "@/components/ui/label.tsx"
 import {Settings} from "lucide-react";
-import React, {MouseEventHandler, useState} from "react";
+import React, {useState} from "react";
 
 export function DialogDemo({
                                task,
