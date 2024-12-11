@@ -16,7 +16,7 @@ const App: React.FC = () => {
     };
 
     return (
-        <div className="flex justify-center bg-sky-100">
+        <div className="flex justify-center bg-white">
             <div className="p-4">
                 <h1 className="align-center  text-2xl font-bold mb-4">Todo App</h1>
                 <TodoForm addTask={addTask}/>
