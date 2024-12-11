@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
-import TodoForm from "@/components/InputForm/TodoForm.tsx";
+import React, {useState} from 'react';
+
 import {TodoList} from "@/components/TodoCard/TodoList.tsx";
+import {ShadCnTodoForm} from "@/components/InputForm/ShadCnFrom.tsx";
+
 
 export interface Task {
     id: number;
@@ -9,29 +11,39 @@ export interface Task {
     completed: boolean;
     createdAt: Date;
 }
+
 const App: React.FC = () => {
     const [tasks, setTasks] = useState<Task[]>([]);
+
     const addTask = (newTask: Task) => {
         setTasks((prevTasks) => [...prevTasks, newTask]);
     };
 
+    const updateTask = (updatedTask: Task) => {
+        setTasks((prevTasks) =>
+            prevTasks.map((task) =>
+                task.id === updatedTask.id ? updatedTask : task
+            )
+        )
+        console.log(updatedTask);
+    }
+    // const onChange = () => {
+    //     console.log("change");
+    // };
+
+
     return (
-        <div className="flex justify-center bg-sky-100">
-            <div className="p-4">
-                <h1 className="align-center  text-2xl font-bold mb-4">Todo App</h1>
-                <TodoForm addTask={addTask}/>
-                {/*<ul className="mt-4">*/}
-                {/*    {tasks.map((task) => (*/}
-                {/*        <li key={task.id} className="border-b border-gray-300 py-2">*/}
-                {/*            <h2 className="font-bold">{task.title}</h2>*/}
-                {/*            <p>{task.description}</p>*/}
-                {/*            <p className="text-sm text-gray-500">Created at: {task.createdAt.toLocaleString()}</p>*/}
-                {/*        </li>*/}
-                {/*    ))}*/}
-                {/*</ul>*/}
-                <TodoList todos={tasks} onChange={setTasks}/>
+        <div className="flex justify-center items-center min-h-screen bg-white-100">
+            <div className="bg-sky-100 rounded-lg shadow-lg w-full max-w-lg p-6">
+                <h1 className="text-center text-3xl font-bold text-gray-800 mb-6">Todo App</h1>
+
+                {/* <TodoForm addTask={addTask}/> */}
+                <ShadCnTodoForm addTask={addTask}/>
+
+                <TodoList todos={tasks} onChange={setTasks} updateTask={updateTask}/>
             </div>
         </div>
+
     );
 };
 

@@ -14,12 +14,14 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import {todoSchema} from "@/components/Validation/InputFormValidation.ts";
+import React, {useState} from "react";
+import {Task} from "@/App.tsx";
 
 
 
 type FormValues = yup.InferType<typeof todoSchema>;
 
-export function ProfileForm() {
+export const ShadCnTodoForm: React.FC<{ addTask: (task: Task) => void }> = ({ addTask }) => {
 
     const form = useForm<FormValues>({
         resolver: yupResolver(todoSchema),
@@ -28,9 +30,26 @@ export function ProfileForm() {
             description: "",
         },
     })
-    function onSubmit(values: FormValues) {
-        console.log(values)
-    }
+
+
+    const onSubmit = (data : FormValues) => {
+
+        if (data.title.trim() && data.description.trim()) {
+            const newTask: Task = {
+                id: Date.now(),
+                title: data.title,
+                description: data.description,
+                completed: false,
+                createdAt: new Date(),
+            };
+            addTask(newTask);
+            console.log(newTask);
+        }
+
+    };
+
+
+
 
     return (
         <Form {...form}>
@@ -40,9 +59,9 @@ export function ProfileForm() {
                     name="title"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Title</FormLabel>
+                            <FormLabel >Title</FormLabel>
                             <FormControl>
-                                <Input placeholder="Add title here" {...field} />
+                                <Input className= "bg-white-200" placeholder="Add title here" {...field} />
                             </FormControl>
                             <FormDescription>
                                 {/*This is the title of your task*/}
@@ -60,7 +79,7 @@ export function ProfileForm() {
                         <FormItem>
                             <FormLabel>Description</FormLabel>
                             <FormControl>
-                                <Input placeholder="Add description here" {...field} />
+                                <Input className= "bg-white-200" placeholder="Add description here" {...field} />
                             </FormControl>
                             <FormDescription>
                                 {/*Enter the description of your task.*/}
