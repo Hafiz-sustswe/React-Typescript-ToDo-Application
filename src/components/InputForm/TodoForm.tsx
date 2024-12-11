@@ -3,9 +3,8 @@ import { Input } from "@/components/ui/input";
 import {Button} from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea"
 
-
 interface Task {
-    id: string;
+    id: number;
     title: string;
     description: string;
     completed: boolean;
@@ -21,13 +20,12 @@ const TodoForm: React.FC<{ addTask: (task: Task) => void }> = ({ addTask }) => {
 
         if (title.trim() && description.trim()) {
             const newTask: Task = {
-                id: "id - 1",
+                id: Date.now(),
                 title,
                 description,
                 completed: false,
                 createdAt: new Date(),
             };
-
             addTask(newTask);
             setTitle(title.trim());
             setDescription(description.trim());
