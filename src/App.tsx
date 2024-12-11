@@ -15,21 +15,26 @@ const App: React.FC = () => {
         setTasks((prevTasks) => [...prevTasks, newTask]);
     };
 
+    const updateTask = (updatedTask: Task) => {
+        setTasks((prevTasks) =>
+            prevTasks.map((task) =>
+                task.id === updatedTask.id ? updatedTask : task
+            )
+        )
+        console.log(updatedTask);
+    }
+    const onChange = () => {
+        console.log("change");
+    };
+
+
     return (
-        <div className="flex justify-center bg-white">
+        <div className="flex justify-center bg-sky-100">
+
             <div className="p-4">
                 <h1 className="align-center  text-2xl font-bold mb-4">Todo App</h1>
                 <TodoForm addTask={addTask}/>
-                {/*<ul className="mt-4">*/}
-                {/*    {tasks.map((task) => (*/}
-                {/*        <li key={task.id} className="border-b border-gray-300 py-2">*/}
-                {/*            <h2 className="font-bold">{task.title}</h2>*/}
-                {/*            <p>{task.description}</p>*/}
-                {/*            <p className="text-sm text-gray-500">Created at: {task.createdAt.toLocaleString()}</p>*/}
-                {/*        </li>*/}
-                {/*    ))}*/}
-                {/*</ul>*/}
-                <TodoList todos={tasks} onChange={setTasks}/>
+                <TodoList todos={tasks} onChange={setTasks} updateTask={updateTask}/>
             </div>
         </div>
     );
