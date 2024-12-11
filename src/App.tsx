@@ -1,6 +1,5 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import TodoForm from "@/components/InputForm/TodoForm.tsx";
-import {DialogDemo} from "@/components/DialogForm/DialogForm.tsx";
 
 interface Task {
     id: number;
@@ -25,7 +24,7 @@ const App: React.FC = () => {
                 <h1 className="align-center  text-2xl font-bold mb-4">Todo App</h1>
 
 
-                <TodoForm addTask={addTask}/>
+                <TodoForm addTask={addTask} />
 
 
                 <ul className="mt-4">

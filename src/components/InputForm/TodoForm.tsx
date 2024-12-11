@@ -3,7 +3,6 @@ import { Input } from "@/components/ui/input";
 import {Button} from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea"
 
-
 interface Task {
     id: number;
     title: string;
@@ -27,7 +26,6 @@ const TodoForm: React.FC<{ addTask: (task: Task) => void }> = ({ addTask }) => {
                 completed: false,
                 createdAt: new Date(),
             };
-
             addTask(newTask);
             setTitle("");
             setDescription("");
