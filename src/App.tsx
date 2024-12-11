@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import TodoForm from "@/components/InputForm/TodoForm.tsx";
+import {DialogDemo} from "@/components/DialogForm/DialogForm.tsx";
 
 interface Task {
     id: number;
@@ -16,6 +17,15 @@ const App: React.FC = () => {
         setTasks((prevTasks) => [...prevTasks, newTask]);
     };
 
+    const updateTask = (updatedTask: Task) => {
+        setTasks((prevTasks) =>
+            prevTasks.map((task) =>
+                task.id === updatedTask.id ? updatedTask : task
+            )
+        )
+        console.log(updatedTask);
+    }
+
     return (
         <div className="flex justify-center bg-sky-100">
 
@@ -24,7 +34,7 @@ const App: React.FC = () => {
                 <h1 className="align-center  text-2xl font-bold mb-4">Todo App</h1>
 
 
-                <TodoForm addTask={addTask} />
+                <TodoForm addTask={addTask}/>
 
 
                 <ul className="mt-4">
@@ -35,6 +45,7 @@ const App: React.FC = () => {
                             <p>{task.description}</p>
 
                             <p className="text-sm text-gray-500">Created at: {task.createdAt.toLocaleString()}</p>
+                            <DialogDemo task={task} updateTask={updateTask}/>
                         </li>
                     ))}
                 </ul>

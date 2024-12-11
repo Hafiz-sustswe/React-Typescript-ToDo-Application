@@ -17,12 +17,20 @@ export function DialogDemo({
                                task,
                                updateTask,
                            }: {
-    task: { id: number; title: string; description: string };
-    updateTask: (updatedTask: { id: number; title: string; description: string }) => void;
+    task: {
+        id: number; title: string; description: string; completed: boolean;
+        createdAt: Date
+    };
+    updateTask: (updatedTask: {
+        id: number; title: string; description: string, completed: boolean;
+        createdAt: Date
+    }) => void;
 }) {
     const [updatedTask, setUpdatedTask] = useState({
         title: task.title,
         description: task.description,
+        completed: task.completed,
+        createdAt: task.createdAt,
     });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -39,6 +47,8 @@ export function DialogDemo({
             id: task.id,
             title: updatedTask.title,
             description: updatedTask.description,
+            completed: updatedTask.completed,
+            createdAt: updatedTask.createdAt,
         })
     }
 
