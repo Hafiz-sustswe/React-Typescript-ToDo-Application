@@ -27,8 +27,8 @@ const TodoForm: React.FC<{ addTask: (task: Task) => void }> = ({ addTask }) => {
                 createdAt: new Date(),
             };
             addTask(newTask);
-            setTitle(title.trim());
-            setDescription(description.trim());
+            setTitle("");
+            setDescription("");
         }
     };
 

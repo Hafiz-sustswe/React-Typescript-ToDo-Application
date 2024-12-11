@@ -5,16 +5,21 @@ import {Task} from "../../App.tsx"
 // import {SingleTodo} from "./SingleTodo";
 //
 interface props {
-     todos: Task[];
-     onChange: React.Dispatch<React.SetStateAction<Task[]>>;
+    todos: Task[];
+    onChange: React.Dispatch<React.SetStateAction<Task[]>>;
+    updateTask: (updatedTask: {
+        id: number; title: string; description: string, completed: boolean;
+        createdAt: Date
+    }) => void;
 
 }
+
 //
-export const TodoList: React.FC<props> = ({todos, onChange}) => {
+export const TodoList: React.FC<props> = ({todos, onChange, updateTask}) => {
     return (
         <div>
             {todos.map((todo) => (
-                <SingleTodo todo={todo} todos={todos} onChange={onChange}/>
+                <SingleTodo todo={todo} todos={todos} onChange={onChange} updateTask={updateTask}/>
             ))}
         </div>
     )
