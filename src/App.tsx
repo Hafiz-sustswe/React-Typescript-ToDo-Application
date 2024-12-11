@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import TodoForm from "@/components/InputForm/TodoForm.tsx";
-import {DialogDemo} from "@/components/DialogForm/DialogForm.tsx";
+import {TodoList} from "@/components/TodoCard/TodoList.tsx";
 
-interface Task {
+export interface Task {
     id: number;
     title: string;
     description: string;
@@ -25,6 +25,10 @@ const App: React.FC = () => {
         )
         console.log(updatedTask);
     }
+    const onChange = () => {
+        console.log("change");
+    };
+
 
     return (
         <div className="flex justify-center bg-sky-100">
@@ -35,20 +39,7 @@ const App: React.FC = () => {
 
 
                 <TodoForm addTask={addTask}/>
-
-
-                <ul className="mt-4">
-                    {tasks.map((task) => (
-                        <li key={task.id} className="border-b border-gray-300 py-2">
-                            <h2 className="font-bold">{task.title}</h2>
-
-                            <p>{task.description}</p>
-
-                            <p className="text-sm text-gray-500">Created at: {task.createdAt.toLocaleString()}</p>
-                            <DialogDemo task={task} updateTask={updateTask}/>
-                        </li>
-                    ))}
-                </ul>
+                <TodoList todos={tasks} onChange={setTasks} updateTask={updateTask}/>
             </div>
         </div>
     );

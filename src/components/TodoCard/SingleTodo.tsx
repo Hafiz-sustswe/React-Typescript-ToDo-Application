@@ -1,12 +1,17 @@
 import {Task} from "../../App.tsx"
 import React, {ChangeEvent, FormEvent, useState} from "react";
 import {MdDeleteForever, MdDoneOutline, MdEdit} from "react-icons/md";
+import {DialogDemo} from "@/components/DialogForm/DialogForm.tsx";
 interface props {
     todo: Task;
     todos: Task[];
     onChange: React.Dispatch<React.SetStateAction<Task[]>>;
+    updateTask: (updatedTask: {
+        id: number; title: string; description: string, completed: boolean;
+        createdAt: Date
+    }) => void;
 }
-export const SingleTodo: React.FC<props> = ({todo, todos, onChange}) => {
+export const SingleTodo: React.FC<props> = ({todo, todos, onChange, updateTask}) => {
     const [edit, setEdit] = useState<boolean>(false);
     const [editedText, setEditedText] = useState<string>(todo.title);
 
@@ -52,6 +57,7 @@ export const SingleTodo: React.FC<props> = ({todo, todos, onChange}) => {
             }}> <MdEdit/> </span>
             <span onClick={() => handle("delete", todo.id)}> <MdDeleteForever/> </span>
             <span onClick={() => handle("done", todo.id)}> <MdDoneOutline/> </span>
+            <span> <DialogDemo task={todo} updateTask={updateTask} /> </span>
         </form>
     )
 }
