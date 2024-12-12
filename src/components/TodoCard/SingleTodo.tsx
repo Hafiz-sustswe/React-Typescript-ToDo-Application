@@ -24,7 +24,6 @@ interface props {
   }) => void;
 }
 
-
 export const SingleTodo: React.FC<props> = ({ todo, handle }) => {
   return (
     <Card className="w-[440px] bg-white m-4">
@@ -37,7 +36,7 @@ export const SingleTodo: React.FC<props> = ({ todo, handle }) => {
       </CardHeader>
       <CardContent>
         <div className="grid w-full gap-4">
-          <CardDescription className="text-center">
+          <CardDescription className="break-words text-center">
             {todo.description}
           </CardDescription>
         </div>
