@@ -1,4 +1,15 @@
 import {Task} from "../../App.tsx"
+// import {MdDeleteForever, MdDoneOutline, MdEdit} from "react-icons/md";
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardFooter,
+    CardHeader,
+    CardTitle,
+    CardTitleDone
+} from "@/components/ui/card.tsx";
+import {Button} from "@/components/ui/button.tsx";
 import React, {ChangeEvent, FormEvent, useState} from "react";
 import {MdDeleteForever, MdDoneOutline, MdEdit} from "react-icons/md";
 import {DialogDemo} from "@/components/DialogForm/DialogForm.tsx";
@@ -29,7 +40,7 @@ export const SingleTodo: React.FC<props> = ({todo, todos, onChange, updateTask, 
             case "edit":
                 onChange(
                     todos.map((todo) =>
-                        todo.id === id ? {...todo, title: editedText} : todo
+                        todo.id === id ? todo : todo
                     )
                 );
                 setEdit(false);
@@ -44,21 +55,45 @@ export const SingleTodo: React.FC<props> = ({todo, todos, onChange, updateTask, 
     console.log(editedText);
     console.log(todos);
     return (
+        <form  onSubmit={(event: FormEvent) => handle("edit", todo.id, event)}>
+            <Card className="w-[510px] bg-white m-4">
+                <CardHeader className="items-center">
+                    {todo.completed ? (
+                        <CardTitleDone>{todo.title}</CardTitleDone>
+                    ) : (
+                        <CardTitle>{todo.title}</CardTitle>
+                    )}
+                </CardHeader>
+                <CardContent >
+                    <div className="grid w-full gap-4">
+                        <CardDescription className="text-center">{todo.description}</CardDescription>
+                    </div>
+                </CardContent>
+                <CardFooter className="flex justify-between">
+                    <Button className="text-white bg-black" variant="outline" size="wide" onClick={() => handle("done", todo.id)}>
+                        Complete
+                    </Button>
 
+                    <Button
+                        className="text-white bg-black" variant="outline"
 
-        <form onSubmit={(event: FormEvent) => {
-            handle("edit", todo.id, event)
-        }}>
-            {edit ? (<input value={editedText} onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                setEditedText(e.target.value)
-            }}/>) : (todo.completed ? (<s>{todo.title}</s>) : (
-                <span>{todo.title}</span>))}
-            <span onClick={() => {
-                if (!edit && !todo.completed) setEdit(!edit);
-            }}> <MdEdit/> </span>
-            <span onClick={() => handle("delete", todo.id)}> <MdDeleteForever/> </span>
-            <span onClick={() => handle("done", todo.id)}> <MdDoneOutline/> </span>
-            <span> <DialogDemo task={todo} updateTask={updateTask} /> </span>
+                        size="wide"
+                        onClick={() => handle("delete", todo.id)}
+                    >
+                        Delete
+                    </Button>
+
+                    <Button
+                        className="text-black border-2" variant="link"
+                        size="wide"
+                        onClick={() => {
+                            if (!edit) setEdit(true);
+                        }}
+                    >
+                        Edit
+                    </Button>
+                </CardFooter>
+            </Card>
         </form>
     )
 }
