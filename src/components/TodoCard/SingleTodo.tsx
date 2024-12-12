@@ -90,7 +90,7 @@ export const SingleTodo: React.FC<props> = ({todo, todos, onChange, updateTask, 
                             if (!edit) setEdit(true);
                         }}
                     >
-                        Edit
+                        <DialogDemo task={todo} updateTask={updateTask} />
                     </Button>
                 </CardFooter>
             </Card>
