@@ -11,15 +11,19 @@ interface props {
         id: number; title: string; description: string, completed: boolean;
         createdAt: Date
     }) => void;
-
+    searchQuery: string;
 }
 
 //
-export const TodoList: React.FC<props> = ({todos, onChange, updateTask}) => {
+export const TodoList: React.FC<props> = ({todos, onChange, updateTask, searchQuery}) => {
+
+    const filteredTodos = todos.filter((todo) =>
+        todo.title.toLowerCase().includes(searchQuery.toLowerCase())
+    );
     return (
         <div>
-            {todos.map((todo) => (
-                <SingleTodo todo={todo} todos={todos} onChange={onChange} updateTask={updateTask}/>
+            {filteredTodos.map((todo) => (
+                <SingleTodo todo={todo} todos={todos} onChange={onChange} updateTask={updateTask} searchQuery={searchQuery}/>
             ))}
         </div>
     )

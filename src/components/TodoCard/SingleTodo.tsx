@@ -21,8 +21,9 @@ interface props {
         id: number; title: string; description: string, completed: boolean;
         createdAt: Date
     }) => void;
+    searchQuery: string;
 }
-export const SingleTodo: React.FC<props> = ({todo, todos, onChange, updateTask}) => {
+export const SingleTodo: React.FC<props> = ({todo, todos, onChange, updateTask, searchQuery}) => {
     const [edit, setEdit] = useState<boolean>(false);
     const [editedText, setEditedText] = useState<string>(todo.title);
 

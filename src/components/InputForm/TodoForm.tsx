@@ -41,6 +41,7 @@ const TodoForm: React.FC<{ addTask: (task: Task) => void }> = ({ addTask }) => {
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTitle(e.target.value)}
                 className="p-2 border border-gray-300 rounded bg-white"
             />
+
             <Textarea
                 placeholder="Enter Your Task Description"
                 value={description}
