@@ -51,7 +51,7 @@ export const SingleTodo: React.FC<props> = ({todo, todos, onChange, updateTask})
                 </CardHeader>
                 <CardContent >
                     <div className="grid w-full gap-4">
-                        <CardDescription className="text-center">{todo.description}</CardDescription>
+                        <CardDescription className="break-words text-center">{todo.description}</CardDescription>
                     </div>
                 </CardContent>
                 <CardFooter className="flex justify-between">

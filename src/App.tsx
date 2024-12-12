@@ -37,17 +37,29 @@ const App: React.FC = () => {
 
 
     return (
-        <div className="flex justify-center items-center min-h-screen bg-white-100">
-            <div className="bg-sky-100 rounded-lg shadow-lg w-full max-w-lg p-6">
-              <h1 className="text-center text-3xl font-bold text-gray-800 mb-6">Todo App</h1>
-                
-                <SearchBox onSearch={handleSearch}/>
-                <ShadCnTodoForm addTask={addTask}/>
-                <TodoList todos={tasks} onChange={setTasks} updateTask={updateTask} searchQuery={searchQuery}/>
-            </div>
-        </div>
+        <>
+            <div className="container flex-col max-w-full">
 
+                <div className="flex justify-center  bg-white-100 h-50">
+                    <div className="bg-sky-100 rounded-lg shadow-lg w-full max-w-lg max-h-[32rem] p-6 mt-10">
+                        <h1 className="text-center text-3xl font-bold text-gray-800 mb-6">Todo App</h1>
+                        <SearchBox onSearch={handleSearch}/>
+                        <ShadCnTodoForm addTask={addTask}/>
+                    </div>
+                </div>
+
+                <div className=" flex bg-white-100 justify-center  top-40  mt-10">
+                    <div className="bg-sky-100 rounded-lg shadow-lg w-full max-w-lg p-6">
+                        <h1 className="text-center text-3xl font-bold text-gray-800 mb-6">Your Task Lists </h1>
+                        <TodoList todos={tasks} onChange={setTasks} updateTask={updateTask} searchQuery={searchQuery}/>
+                    </div>
+                </div>
+
+            </div>
+        </>
     );
+
+
 };
 
 export default App;
