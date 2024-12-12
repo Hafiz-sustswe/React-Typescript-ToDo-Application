@@ -55,7 +55,7 @@ export function DialogDemo({
     return (
         <Dialog>
             <DialogTrigger asChild>
-                <Button variant="outline">
+                <Button variant="link">
                     <Settings/>
                 </Button>
             </DialogTrigger>

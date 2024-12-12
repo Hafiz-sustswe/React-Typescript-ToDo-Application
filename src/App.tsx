@@ -44,7 +44,6 @@ const App: React.FC = () => {
                 
                 <SearchBox onSearch={handleSearch}/>
                 <ShadCnTodoForm addTask={addTask}/>
-
                 <TodoList todos={tasks} onChange={setTasks} updateTask={updateTask} searchQuery={searchQuery}/>
             </div>
         </div>
