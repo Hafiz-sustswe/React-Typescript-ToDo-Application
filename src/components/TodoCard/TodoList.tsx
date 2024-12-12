@@ -23,7 +23,7 @@ export const TodoList: React.FC<props> = ({todos, onChange, updateTask, searchQu
     return (
         <div>
             {filteredTodos.map((todo) => (
-                <SingleTodo todo={todo} todos={todos} onChange={onChange} updateTask={updateTask} searchQuery={searchQuery}/>
+                <SingleTodo todo={todo} todos={todos} onChange={onChange} updateTask={updateTask}/>
             ))}
         </div>
     )
