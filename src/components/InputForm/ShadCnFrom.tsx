@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import {todoSchema} from "@/components/Validation/InputFormValidation.ts";
-import React, {useState} from "react";
+
 import {Task} from "@/App.tsx";
 
 
@@ -44,11 +44,11 @@ export const ShadCnTodoForm: React.FC<{ addTask: (task: Task) => void }> = ({ ad
             };
             addTask(newTask);
             console.log(newTask);
+            data.title = "";
+            data.description = "";
         }
 
     };
-
-
 
 
     return (

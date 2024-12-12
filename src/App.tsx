@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import TodoForm from "@/components/InputForm/TodoForm.tsx";
 import {TodoList} from "@/components/TodoCard/TodoList.tsx";
 import SearchBox from "@/components/SearchBox/SearchBox.tsx";
 import {ShadCnTodoForm} from "@/components/InputForm/ShadCnFrom.tsx";
@@ -19,7 +18,6 @@ const App: React.FC = () => {
     const handleSearch = (query: string) => {
         setSearchQuery(query);
     }
-
 
     const addTask = (newTask: Task) => {
         setTasks((prevTasks) => [...prevTasks, newTask]);
@@ -44,9 +42,7 @@ const App: React.FC = () => {
               <h1 className="text-center text-3xl font-bold text-gray-800 mb-6">Todo App</h1>
                 
                 <SearchBox onSearch={handleSearch}/>
-                
                 <ShadCnTodoForm addTask={addTask}/>
-                
                 <TodoList todos={tasks} onChange={setTasks} updateTask={updateTask} searchQuery={searchQuery}/>
             </div>
         </div>
