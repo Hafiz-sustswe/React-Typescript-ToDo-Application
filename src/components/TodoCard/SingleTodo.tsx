@@ -56,7 +56,7 @@ export const SingleTodo: React.FC<props> = ({todo, todos, onChange, updateTask, 
     console.log(todos);
     return (
         <form  onSubmit={(event: FormEvent) => handle("edit", todo.id, event)}>
-            <Card className="w-[510px] bg-white m-4">
+            <Card className="w-[440px] bg-white m-4">
                 <CardHeader className="items-center">
                     {todo.completed ? (
                         <CardTitleDone>{todo.title}</CardTitleDone>
