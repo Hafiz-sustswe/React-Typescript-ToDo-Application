@@ -13,5 +13,5 @@ export const todoSchema = yup.object({
         .min(10, "Description must be at least 10 characters.")
         .max(300, "Description must not exceed 300 characters.")
         .matches(/^[a-zA-Z0-9\s.,!?"'-]+$/, "Description can only contain valid characters like letters, numbers, and punctuation.")
-        .optional(), // Make it optional if you want to allow empty descriptions
+        .optional(),
 });
