@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import TodoForm from "@/components/InputForm/TodoForm.tsx";
 import {TodoList} from "@/components/TodoCard/TodoList.tsx";
+import SearchBox from "@/components/SearchBox/SearchBox.tsx";
 
 export interface Task {
     id: number;
@@ -12,6 +13,12 @@ export interface Task {
 
 const App: React.FC = () => {
     const [tasks, setTasks] = useState<Task[]>([]);
+
+    const [searchQuery, setSearchQuery] = useState<string>('');
+
+    const handleSearch = (query: string) => {
+        setSearchQuery(query);
+    }
 
     const addTask = (newTask: Task) => {
         setTasks((prevTasks) => [...prevTasks, newTask]);
@@ -37,9 +44,9 @@ const App: React.FC = () => {
 
                 <h1 className="align-center  text-2xl font-bold mb-4">Todo App</h1>
 
-
+                <SearchBox onSearch={handleSearch}/>
                 <TodoForm addTask={addTask}/>
-                <TodoList todos={tasks} onChange={setTasks} updateTask={updateTask}/>
+                <TodoList todos={tasks} onChange={setTasks} updateTask={updateTask} searchQuery={searchQuery}/>
             </div>
         </div>
     );
