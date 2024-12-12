@@ -44,6 +44,8 @@ export const ShadCnTodoForm: React.FC<{ addTask: (task: Task) => void }> = ({ ad
             };
             addTask(newTask);
             console.log(newTask);
+            data.title = "";
+            data.description = "";
         }
 
     };

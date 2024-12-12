@@ -1,6 +1,15 @@
 import {Task} from "../../App.tsx"
-import React, {ChangeEvent, FormEvent, useState} from "react";
-import {MdDeleteForever, MdDoneOutline, MdEdit} from "react-icons/md";
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardFooter,
+    CardHeader,
+    CardTitle,
+    CardTitleDone
+} from "@/components/ui/card.tsx";
+import {Button} from "@/components/ui/button.tsx";
+import React, {FormEvent} from "react";
 import {DialogDemo} from "@/components/DialogForm/DialogForm.tsx";
 interface props {
     todo: Task;
@@ -12,9 +21,6 @@ interface props {
     }) => void;
 }
 export const SingleTodo: React.FC<props> = ({todo, todos, onChange, updateTask}) => {
-    const [edit, setEdit] = useState<boolean>(false);
-    const [editedText, setEditedText] = useState<string>(todo.title);
-
     const handle = (action: string, id: number, e?: FormEvent) => {
         e?.preventDefault();
         switch (action) {
@@ -25,14 +31,6 @@ export const SingleTodo: React.FC<props> = ({todo, todos, onChange, updateTask})
                     )
                 );
                 break;
-            case "edit":
-                onChange(
-                    todos.map((todo) =>
-                        todo.id === id ? {...todo, title: editedText} : todo
-                    )
-                );
-                setEdit(false);
-                break;
             case "delete":
                 onChange(
                     todos.filter((todo) => todo.id !== id)
@@ -40,24 +38,42 @@ export const SingleTodo: React.FC<props> = ({todo, todos, onChange, updateTask})
                 break;
         }
     };
-    console.log(editedText);
     console.log(todos);
     return (
+        <form  onSubmit={(event: FormEvent) => handle("edit", todo.id, event)}>
+            <Card className="w-[440px] bg-white m-4">
+                <CardHeader className="items-center">
+                    {todo.completed ? (
+                        <CardTitleDone>{todo.title}</CardTitleDone>
+                    ) : (
+                        <CardTitle>{todo.title}</CardTitle>
+                    )}
+                </CardHeader>
+                <CardContent >
+                    <div className="grid w-full gap-4">
+                        <CardDescription className="text-center">{todo.description}</CardDescription>
+                    </div>
+                </CardContent>
+                <CardFooter className="flex justify-between">
+                    <Button className="text-white bg-black" variant="outline" size="wide" onClick={() => handle("done", todo.id)}>
+                        Complete
+                    </Button>
+                    <Button
+                        className="text-white bg-black" variant="outline"
+                        size="wide"
+                        onClick={() => handle("delete", todo.id)}
+                    >
+                        Delete
+                    </Button>
 
-
-        <form onSubmit={(event: FormEvent) => {
-            handle("edit", todo.id, event)
-        }}>
-            {edit ? (<input value={editedText} onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                setEditedText(e.target.value)
-            }}/>) : (todo.completed ? (<s>{todo.title}</s>) : (
-                <span>{todo.title}</span>))}
-            <span onClick={() => {
-                if (!edit && !todo.completed) setEdit(!edit);
-            }}> <MdEdit/> </span>
-            <span onClick={() => handle("delete", todo.id)}> <MdDeleteForever/> </span>
-            <span onClick={() => handle("done", todo.id)}> <MdDoneOutline/> </span>
-            <span> <DialogDemo task={todo} updateTask={updateTask} /> </span>
+                    <Button
+                        className="text-black border-2" variant="link"
+                        size="wide"
+                    >
+                        <DialogDemo task={todo} updateTask={updateTask} />
+                    </Button>
+                </CardFooter>
+            </Card>
         </form>
     )
 }
