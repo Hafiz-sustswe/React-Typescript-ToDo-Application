@@ -83,7 +83,8 @@ export function DialogDemo({
                 </div>
                 <DialogFooter>
                     <DialogTrigger asChild>
-                        <Button className="text-white bg-black" variant="outline" type="submit" onClick={handleSubmit}>Save
+                        <Button className="text-black border-2" variant="link"
+                                size="wide" type="submit" onClick={handleSubmit}>Save
                             changes</Button>
                     </DialogTrigger>
                 </DialogFooter>
@@ -91,3 +92,4 @@ export function DialogDemo({
         </Dialog>
     )
 }
+
