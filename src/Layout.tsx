@@ -12,28 +12,46 @@ export interface Task {
 }
 
 const Layout: React.FC = () => {
-    const [start, setStart] = useState(true);
     const [tasks, setTasks] = useState<Task[]>([]);
-
-    const [searchQuery, setSearchQuery] = useState<string>('');
-
-    const handleSearch = (query: string) => {
-        setSearchQuery(query);
-    }
-
-    const addTask = (newTask: Task) => {
-        setTasks((prevTasks) => [...prevTasks, newTask]);
-    };
-
-    const updateTask = (updatedTask: Task) => {
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const handleSearch = (query: string) => {
+    setSearchQuery(query);
+  };
+  const addTask = (newTask: Task) => {
+    setTasks((prevTasks) => [...prevTasks, newTask]);
+  };
+  const handle = ({
+    action,
+    id,
+    updatedTask,
+    e,
+  }: {
+    action: string;
+    id: number;
+    updatedTask: Task;
+    e?: FormEvent;
+  }) => {
+    e?.preventDefault();
+    switch (action) {
+      case "done":
+        setTasks(
+          tasks.map((todo) =>
+            todo.id === id ? { ...todo, completed: !todo.completed } : todo,
+          ),
+        );
+        break;
+      case "delete":
+        setTasks(tasks.filter((todo) => todo.id !== id));
+        break;
+      case "edit":
         setTasks((prevTasks) =>
-            prevTasks.map((task) =>
-                task.id === updatedTask.id ? updatedTask : task
-            )
-        )
-        console.log(updatedTask);
+          prevTasks.map((task) =>
+            task.id === updatedTask.id ? updatedTask : task,
+          ),
+        );
+        break;
     }
-
+  };
 
 
     return (
@@ -70,19 +88,26 @@ const Layout: React.FC = () => {
                     </div>
                 </div>
             ) : (
-                <div className="bg-white rounded-lg shadow-lg w-full max-w-3xl p-6 mt-10">
-                    <h1 className="text-center text-3xl font-bold text-blue-800 mb-6">
-                        My Todo App
-                    </h1>
-                    <SearchBox onSearch={handleSearch}/>
-                    <ShadCnTodoForm addTask={addTask}/>
-                    <TodoList
-                        todos={tasks}
-                        onChange={setTasks}
-                        updateTask={updateTask}
-                        searchQuery={searchQuery}
-                    />
-                </div>
+                <>
+  <div className="container flex-col max-w-full">
+
+    <div className="flex justify-center  bg-white-100 h-50">
+      <div className="bg-sky-100 rounded-lg shadow-lg w-full max-w-lg max-h-[32rem] p-6 mt-10">
+        <h1 className="text-center text-3xl font-bold text-gray-800 mb-6">Todo App</h1>
+        <SearchBox onSearch={handleSearch}/>
+        <ShadCnTodoForm addTask={addTask}/>
+      </div>
+    </div>
+
+    <div className=" flex bg-white-100 justify-center  top-40  mt-10">
+      <div className="bg-sky-100 rounded-lg shadow-lg w-full max-w-lg p-6">
+        <h1 className="text-center text-3xl font-bold text-gray-800 mb-6">Your Task Lists </h1>
+        <TodoList todos={tasks} handle={handle} searchQuery={searchQuery} />
+      </div>
+    </div>
+
+  </div>
+</>
             )}
         </div>
     );
