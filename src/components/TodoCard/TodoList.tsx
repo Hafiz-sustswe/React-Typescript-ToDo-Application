@@ -1,6 +1,9 @@
-import React, { FormEvent } from "react";
-import { SingleTodo } from "@/components/TodoCard/SingleTodo.tsx";
-import { Task } from "../../App.tsx";
+
+import React from "react";
+import {SingleTodo} from "@/components/TodoCard/SingleTodo.tsx";
+import {Task} from "../../Layout.tsx"
+
+
 
 interface props {
   todos: Task[];

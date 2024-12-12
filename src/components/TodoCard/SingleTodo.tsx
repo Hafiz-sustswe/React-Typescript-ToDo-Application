@@ -1,4 +1,7 @@
-import { Task } from "../../App.tsx";
+
+import {Task} from "../../Layout.tsx"
+
+
 import {
   Card,
   CardContent,
@@ -20,6 +23,7 @@ interface props {
     e?: FormEvent;
   }) => void;
 }
+
 
 export const SingleTodo: React.FC<props> = ({ todo, handle }) => {
   return (
