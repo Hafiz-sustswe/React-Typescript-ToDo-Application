@@ -1,4 +1,4 @@
-import {Task} from "../../App.tsx"
+import {Task} from "../../Layout.tsx"
 import {
     Card,
     CardContent,
@@ -40,8 +40,8 @@ export const SingleTodo: React.FC<props> = ({todo, todos, onChange, updateTask})
     };
     console.log(todos);
     return (
-        <form  onSubmit={(event: FormEvent) => handle("edit", todo.id, event)}>
-            <Card className="w-[440px] bg-white m-4">
+        <form className="items-end" onSubmit={(event: FormEvent) => handle("edit", todo.id, event)}>
+            <Card className="w-[440px] justify-center items-center bg-white m-4">
                 <CardHeader className="items-center">
                     {todo.completed ? (
                         <CardTitleDone>{todo.title}</CardTitleDone>

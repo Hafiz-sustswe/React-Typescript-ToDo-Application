@@ -1,6 +1,6 @@
 import React from "react";
 import {SingleTodo} from "@/components/TodoCard/SingleTodo.tsx";
-import {Task} from "../../App.tsx"
+import {Task} from "../../Layout.tsx"
 // import {Todo} from "../model";
 // import {SingleTodo} from "./SingleTodo";
 //
