@@ -11,8 +11,8 @@ import {
 import { Input } from "@/components/ui/input.tsx";
 import { Label } from "@/components/ui/label.tsx";
 import { Settings } from "lucide-react";
-import React, { FormEvent, useState } from "react";
-import { Task } from "@/App.tsx";
+import React, { useState } from "react";
+import { Action } from "@/todoAction";
 
 export function DialogDemo({
   task,
@@ -25,12 +25,7 @@ export function DialogDemo({
     completed: boolean;
     createdAt: Date;
   };
-  handle: (handle: {
-    action: string;
-    id: number;
-    updatedTask: Task;
-    e?: FormEvent;
-  }) => void;
+  handle: (action: Action) => void;
 }) {
   const [updatedTask, setUpdatedTask] = useState({
     title: task.title,
@@ -50,8 +45,7 @@ export function DialogDemo({
 
   const handleSubmit = () => {
     handle({
-      action: "edit",
-      id: task.id,
+      type: "edit",
       updatedTask: {
         id: task.id,
         title: updatedTask.title,

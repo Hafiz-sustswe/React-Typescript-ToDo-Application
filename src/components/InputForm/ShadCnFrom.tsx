@@ -15,7 +15,7 @@ import {
 import { Input } from "@/components/ui/input"
 import {todoSchema} from "@/components/Validation/InputFormValidation.ts";
 
-import {Task} from "@/Layout.tsx";
+import {Task} from "@/todoAction";
 
 
 
@@ -34,7 +34,7 @@ export const ShadCnTodoForm: React.FC<{ addTask: (task: Task) => void }> = ({ ad
 
     const onSubmit = (data : FormValues) => {
         const trimmedTitle = data.title.trim();
-        const trimmedDescription = data?.description.trim() ;
+        const trimmedDescription = (data?.description ?? '').trim() ;
 
         if (trimmedTitle ) {
             const newTask: Task = {

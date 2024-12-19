@@ -1,5 +1,5 @@
 
-import {Task} from "../../Layout.tsx"
+import { Task, Action } from "../../todoAction"
 
 
 import {
@@ -11,17 +11,12 @@ import {
   CardTitleDone,
 } from "@/components/ui/card.tsx";
 import { Button } from "@/components/ui/button.tsx";
-import React, { FormEvent } from "react";
+import React from "react";
 import { DialogDemo } from "@/components/DialogForm/DialogForm.tsx";
 
 interface props {
   todo: Task;
-  handle: (handle: {
-    action: string;
-    id: number;
-    updatedTask: Task;
-    e?: FormEvent;
-  }) => void;
+  handle: (action: Action) => void;
 }
 
 export const SingleTodo: React.FC<props> = ({ todo, handle }) => {
@@ -48,9 +43,8 @@ export const SingleTodo: React.FC<props> = ({ todo, handle }) => {
           size="wide"
           onClick={() =>
             handle({
-              action: "done",
-              id: todo.id,
-              updatedTask: todo,
+              type: "done",
+              id: todo.id
             })
           }
         >
@@ -62,9 +56,8 @@ export const SingleTodo: React.FC<props> = ({ todo, handle }) => {
           size="wide"
           onClick={() =>
             handle({
-              action: "delete",
+              type: "delete",
               id: todo.id,
-              updatedTask: todo,
             })
           }
         >

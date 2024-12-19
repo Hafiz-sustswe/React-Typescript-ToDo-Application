@@ -1,10 +1,10 @@
 import React from "react";
 import { SingleTodo } from "@/components/TodoCard/SingleTodo.tsx";
-import { Task } from "../../Layout.tsx";
+import { Task, Action } from "../../todoAction";
 
 interface props {
   todos: Task[];
-  handle: (handle: { action: string; id: number; updatedTask: Task }) => void;
+  handle: (action: Action) => void;
   searchQuery: string;
 }
 
